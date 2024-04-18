@@ -5,4 +5,5 @@ export const colors = {
   lightGrayrishBlue: "hsl(233, 11%, 84%)",
   darkGrayrishBlue: "hsl(236, 9%, 61%)",
   veryDarkGrayrishBlue: "hsl(235, 19%, 35%)",
+  gradient: "linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%)",
 };

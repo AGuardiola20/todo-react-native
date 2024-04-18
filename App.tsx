@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import { colors } from "./colors";
 import useFont from "./hooks/useFont";
 import MoonIcon from "./components/MoonIcon";
+import NewTask from "./components/NewTask";
 
 interface Props {
   // Define tus props aquí
@@ -17,7 +18,7 @@ const App: React.FC<Props> = ({}) => {
         resizeMode="stretch"
         style={{ width: "100%", position: "absolute", top: 0, left: 0 }}
       />
-      <View style={{ marginHorizontal: 30, marginVertical: 40 }}>
+      <View style={styles.todoContainer}>
         <View
           style={{
             flexDirection: "row",
@@ -28,6 +29,7 @@ const App: React.FC<Props> = ({}) => {
           <Text style={styles.title}>Todo</Text>
           <MoonIcon />
         </View>
+        <NewTask />
       </View>
     </View>
   );
@@ -43,6 +45,10 @@ const styles = StyleSheet.create({
     fontSize: 28,
     color: colors.lightGray,
     fontWeight: "bold",
+  },
+  todoContainer: {
+    marginVertical: 40,
+    marginHorizontal: 30,
   },
 });
 
