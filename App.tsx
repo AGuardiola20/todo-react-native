@@ -1,36 +1,42 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  ImageBackground,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+} from "react-native";
 import { colors } from "./colors";
 import useFont from "./hooks/useFont";
 import MoonIcon from "./components/MoonIcon";
 import NewTask from "./components/NewTask";
+import TaskList from "./components/TaskList";
 
-interface Props {
-  // Define tus props aquí
-}
-
-const App: React.FC<Props> = ({}) => {
+const App: React.FC = () => {
   const font = useFont();
+  const dimension = Dimensions.get("screen");
   return (
     <View style={styles.container}>
       <Image
         source={require("./assets/images/bg-mobile-light.jpg")}
-        resizeMode="stretch"
-        style={{ width: "100%", position: "absolute", top: 0, left: 0 }}
+        resizeMode="cover"
+        style={{ width: dimension.width, position: "absolute" }}
       />
       <View style={styles.todoContainer}>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
+        <View style={styles.header}>
           <Text style={styles.title}>Todo</Text>
-          <MoonIcon />
+          <TouchableOpacity>
+            <MoonIcon />
+          </TouchableOpacity>
         </View>
         <NewTask />
       </View>
+      <ScrollView style={styles.todoContainer}>
+        <TaskList taskTitle="name" />
+      </ScrollView>
     </View>
   );
 };
@@ -40,6 +46,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.veryLightGrayrishBlue,
   },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 20,
+  },
   title: {
     textTransform: "uppercase",
     fontSize: 28,
@@ -47,8 +59,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   todoContainer: {
-    marginVertical: 40,
     marginHorizontal: 30,
+    marginVertical: 50,
   },
 });
 

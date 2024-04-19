@@ -46,21 +46,21 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
-    marginVertical: 20,
+    marginVertical: 30,
   },
   input: {
     flex: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
-    paddingVertical: 8,
+    paddingVertical: 15,
     marginRight: 10,
-    fontSize: 14,
+    fontSize: 16,
     backgroundColor: colors.lightGray,
   },
   button: {
     backgroundColor: colors.gradient,
     borderRadius: 5,
-    paddingVertical: 10,
+    paddingVertical: 15,
     paddingHorizontal: 15,
   },
   buttonText: {
