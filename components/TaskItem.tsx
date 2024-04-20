@@ -29,9 +29,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingVertical: 16,
     paddingHorizontal: 30,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.lightGrayrishBlue,
   },
   text: {
-    fontSize: 18,
+    fontSize: 14,
   },
 });
 

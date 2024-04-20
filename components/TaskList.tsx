@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { colors } from "../colors";
 import TaskItem from "./TaskItem";
 
@@ -32,18 +32,21 @@ const TaskList: React.FC<Props> = ({ taskTitle }) => {
     <View style={styles.container}>
       <View style={styles.container}>
         {taskList.map((task, index) => {
-          const itemStyle =
-            index < taskList.length - 1 ? styles.itemContainer : null;
           return (
-            <View key={index} style={itemStyle}>
-              <TaskItem
-                taskTitle={task.taskName}
-                isComplete={task.isComplete}
-                checked={() => {}}
-              />
-            </View>
+            <TaskItem
+              key={index}
+              taskTitle={task.taskName}
+              isComplete={task.isComplete}
+              checked={() => {}}
+            />
           );
         })}
+        <View style={styles.cardButtons}>
+          <Text>{taskList.length} items left</Text>
+          <TouchableOpacity>
+            <Text>Clear Completed</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -54,9 +57,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightGray,
     borderRadius: 10,
   },
-  itemContainer: {
-    borderBottomWidth: 1,
-    borderBottomColor: colors.lightGrayrishBlue,
+  cardButtons: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 30,
+    marginVertical: 16,
   },
 });
 
