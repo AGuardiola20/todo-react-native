@@ -8,31 +8,35 @@ interface Props {
   taskTitle: string;
 }
 
-const TASK_LIST = [
-  {
-    isComplete: false,
-    taskName: "Code for 10 hour",
-  },
-  {
-    isComplete: false,
-    taskName: "Eat",
-  },
-  {
-    isComplete: false,
-    taskName: "Speak",
-  },
-  {
-    isComplete: false,
-    taskName: "Hear",
-  },
-];
-
 const TaskList: React.FC<Props> = ({ taskTitle }) => {
+  const TASK_LIST = [
+    {
+      isComplete: false,
+      taskName: "Code for 10 hour",
+    },
+    {
+      isComplete: false,
+      taskName: "Eat",
+    },
+    {
+      isComplete: false,
+      taskName: "Speak",
+    },
+    {
+      isComplete: false,
+      taskName: "Hear",
+    },
+  ];
   const [taskList, setTaskList] = useState(TASK_LIST);
 
   const showToasts = () => {
     Toast.success("Task deleted");
   };
+  function handleDeleteTask(taskName: string) {
+    const newList = taskList.filter((task) => task.taskName !== taskName);
+    showToasts();
+    setTaskList(newList);
+  }
   return (
     <View style={styles.container}>
       <View style={styles.container}>
@@ -43,7 +47,7 @@ const TaskList: React.FC<Props> = ({ taskTitle }) => {
               taskTitle={task.taskName}
               isComplete={task.isComplete}
               handleChecked={() => {}}
-              handleDelete={() => showToasts()}
+              handleDelete={() => handleDeleteTask(task.taskName)}
             />
           );
         })}
