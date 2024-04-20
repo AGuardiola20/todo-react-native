@@ -4,10 +4,10 @@ This Todo application is a simple tool designed to help you manage your tasks ef
 
 ## Demo
 <div style="display: flex">
-  <img src="./assets/demo/demo1.JPG" width="200" height="420">
-  <img src="./assets/demo/demo2.JPG" width="200" height="420">
-  <img src="./assets/demo/demo3.JPG" width="200" height="420">
-  <img src="./assets/demo/demo4.JPG" width="200" height="420">
+  <img src="./assets/demo/demo1.JPG" width="170" height="350">
+  <img src="./assets/demo/demo2.JPG" width="170" height="350">
+  <img src="./assets/demo/demo3.JPG" width="170" height="350">
+  <img src="./assets/demo/demo4.JPG" width="170" height="350">
 </div>
 
 ## Features
