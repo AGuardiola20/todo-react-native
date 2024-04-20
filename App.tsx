@@ -34,7 +34,7 @@ const App: React.FC = () => {
         </View>
         <NewTask />
       </View>
-      <ScrollView style={styles.todoContainer}>
+      <ScrollView style={styles.todoContainerList}>
         <TaskList taskTitle="name" />
       </ScrollView>
     </View>
@@ -60,7 +60,10 @@ const styles = StyleSheet.create({
   },
   todoContainer: {
     marginHorizontal: 30,
-    marginVertical: 50,
+    marginTop: 50,
+  },
+  todoContainerList: {
+    marginHorizontal: 30,
   },
 });
 

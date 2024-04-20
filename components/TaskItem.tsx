@@ -1,19 +1,25 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import CheckIcon from "./CheckIcon";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
+import { colors } from "../colors";
 
 interface Props {
   taskTitle: string;
   isComplete: boolean;
+  checked: (isComplete: boolean) => void;
 }
 
-const TaskItem: React.FC<Props> = ({ taskTitle, isComplete }) => {
+const TaskItem: React.FC<Props> = ({ taskTitle, isComplete, checked }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.checkbox}>
-        <CheckIcon />
-      </TouchableOpacity>
-      <Text>{taskTitle}</Text>
+      <BouncyCheckbox
+        onPress={(isComplete: boolean) => {
+          checked(isComplete);
+        }}
+        text={taskTitle}
+        fillColor={colors.gradient}
+        textStyle={styles.text}
+      />
     </View>
   );
 };
@@ -21,11 +27,11 @@ const TaskItem: React.FC<Props> = ({ taskTitle, isComplete }) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
+    paddingVertical: 16,
+    paddingHorizontal: 30,
   },
-  checkbox: {
-    borderWidth: 1,
+  text: {
+    fontSize: 18,
   },
 });
 

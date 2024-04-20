@@ -10,7 +10,7 @@ interface Props {
 const TASK_LIST = [
   {
     isComplete: false,
-    taskName: "Code for 1 hour",
+    taskName: "Code for 10 hour",
   },
   {
     isComplete: false,
@@ -27,10 +27,24 @@ const TASK_LIST = [
 ];
 
 const TaskList: React.FC<Props> = ({ taskTitle }) => {
-  const [taskList, setTaskList] = useState([]);
+  const [taskList, setTaskList] = useState(TASK_LIST);
   return (
     <View style={styles.container}>
-      <TaskItem taskTitle="hola" isComplete={false} />
+      <View style={styles.container}>
+        {taskList.map((task, index) => {
+          const itemStyle =
+            index < taskList.length - 1 ? styles.itemContainer : null;
+          return (
+            <View key={index} style={itemStyle}>
+              <TaskItem
+                taskTitle={task.taskName}
+                isComplete={task.isComplete}
+                checked={() => {}}
+              />
+            </View>
+          );
+        })}
+      </View>
     </View>
   );
 };
@@ -39,7 +53,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.lightGray,
     borderRadius: 10,
-    paddingHorizontal: 30,
+  },
+  itemContainer: {
+    borderBottomWidth: 1,
+    borderBottomColor: colors.lightGrayrishBlue,
   },
 });
 
