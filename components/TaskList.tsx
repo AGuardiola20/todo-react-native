@@ -1,42 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { colors } from "../colors";
 import TaskItem from "./TaskItem";
-import ToastManager, { Toast } from "toastify-react-native";
+import { Toast } from "toastify-react-native";
 
 interface Props {
-  taskTitle: string;
+  tasks: { isComplete: boolean; taskName: string }[];
 }
 
-const TaskList: React.FC<Props> = ({ taskTitle }) => {
-  const TASK_LIST = [
-    {
-      isComplete: false,
-      taskName: "Code for 10 hour",
-    },
-    {
-      isComplete: false,
-      taskName: "Eat",
-    },
-    {
-      isComplete: false,
-      taskName: "Speak",
-    },
-    {
-      isComplete: false,
-      taskName: "Hear",
-    },
-  ];
-  const [taskList, setTaskList] = useState(TASK_LIST);
+const TaskList: React.FC<Props> = ({ tasks }) => {
+  const [taskList, setTaskList] = useState(tasks);
 
-  const showToasts = () => {
-    Toast.success("Task deleted");
+  useEffect(() => {
+    setTaskList(tasks);
+  }, [tasks]);
+
+  const showToasts = (text: string) => {
+    Toast.success(text);
   };
-  function handleDeleteTask(taskName: string) {
+  const handleDeleteTask = (taskName: string) => {
     const newList = taskList.filter((task) => task.taskName !== taskName);
-    showToasts();
+    showToasts(`Task has been deleted`);
     setTaskList(newList);
-  }
+  };
+  const clearAll = () => {
+    const newList = [];
+    showToasts("All tasks cleared");
+    setTaskList(newList);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.container}>
@@ -53,7 +44,7 @@ const TaskList: React.FC<Props> = ({ taskTitle }) => {
         })}
         <View style={styles.cardButtons}>
           <Text>{taskList.length} items left</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => clearAll()}>
             <Text>Clear Completed</Text>
           </TouchableOpacity>
         </View>

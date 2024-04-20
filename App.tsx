@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -19,6 +19,13 @@ import ToastManager from "toastify-react-native";
 const App: React.FC = () => {
   const font = useFont();
   const dimension = Dimensions.get("screen");
+  const [tasks, setTasks] = useState([]);
+
+  const handleAddTask = (task: { isComplete: boolean; taskName: string }) => {
+    const newTaskList = [...tasks, task];
+    setTasks(newTaskList);
+  };
+
   return (
     <View style={styles.container}>
       <ToastManager position="top" />
@@ -34,10 +41,10 @@ const App: React.FC = () => {
             <MoonIcon />
           </TouchableOpacity>
         </View>
-        <NewTask />
+        <NewTask handleAdd={handleAddTask} />
       </View>
       <ScrollView style={styles.todoContainerList}>
-        <TaskList taskTitle="name" />
+        <TaskList tasks={tasks} />
       </ScrollView>
     </View>
   );

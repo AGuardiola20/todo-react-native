@@ -8,7 +8,11 @@ import {
 } from "react-native";
 import { colors } from "../colors";
 
-const NewTask: React.FC = () => {
+interface Props {
+  handleAdd: (task: { isComplete: boolean; taskName: string }) => void;
+}
+
+const NewTask: React.FC<Props> = ({ handleAdd }) => {
   const [task, setTask] = useState("");
 
   const handleTaskChange = (text: string) => {
@@ -33,9 +37,12 @@ const NewTask: React.FC = () => {
         placeholder="Create a new todo..."
         value={task}
         onChangeText={handleTaskChange}
-        onSubmitEditing={handleTaskSubmit}
+        onSubmitEditing={() => handleAdd({ isComplete: false, taskName: task })}
       />
-      <TouchableOpacity style={styles.button} onPress={handleTaskSubmit}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => handleAdd({ isComplete: false, taskName: task })}
+      >
         <Text style={styles.buttonText}>Add</Text>
       </TouchableOpacity>
     </View>
