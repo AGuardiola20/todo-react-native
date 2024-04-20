@@ -17,6 +17,7 @@
     "react-native-bouncy-checkbox": "^4.0.0",
     "react-native-safe-area-context": "^4.8.2",
     "react-native-svg": "^15.1.0",
+    "toastify-react-native": "^5.0.0",
     "typescript": "^5.3.0"
   },
   "devDependencies": {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { colors } from "../colors";
 import TaskItem from "./TaskItem";
+import ToastManager, { Toast } from "toastify-react-native";
 
 interface Props {
   taskTitle: string;
@@ -28,6 +29,10 @@ const TASK_LIST = [
 
 const TaskList: React.FC<Props> = ({ taskTitle }) => {
   const [taskList, setTaskList] = useState(TASK_LIST);
+
+  const showToasts = () => {
+    Toast.success("Task deleted");
+  };
   return (
     <View style={styles.container}>
       <View style={styles.container}>
@@ -37,7 +42,8 @@ const TaskList: React.FC<Props> = ({ taskTitle }) => {
               key={index}
               taskTitle={task.taskName}
               isComplete={task.isComplete}
-              checked={() => {}}
+              handleChecked={() => {}}
+              handleDelete={() => showToasts()}
             />
           );
         })}

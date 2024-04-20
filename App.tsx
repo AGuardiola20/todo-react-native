@@ -14,12 +14,14 @@ import useFont from "./hooks/useFont";
 import MoonIcon from "./components/MoonIcon";
 import NewTask from "./components/NewTask";
 import TaskList from "./components/TaskList";
+import ToastManager from "toastify-react-native";
 
 const App: React.FC = () => {
   const font = useFont();
   const dimension = Dimensions.get("screen");
   return (
     <View style={styles.container}>
+      <ToastManager position="top" />
       <Image
         source={require("./assets/images/bg-mobile-light.jpg")}
         resizeMode="cover"
