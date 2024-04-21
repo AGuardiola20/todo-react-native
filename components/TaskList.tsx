@@ -6,28 +6,17 @@ import { Toast } from "toastify-react-native";
 
 interface Props {
   tasks: { isComplete: boolean; taskName: string }[];
+  clearAll: () => void;
+  handleDeleteTask: (taskName: string) => void;
 }
 
-const TaskList: React.FC<Props> = ({ tasks }) => {
+const TaskList: React.FC<Props> = ({ tasks, clearAll, handleDeleteTask }) => {
   const [taskList, setTaskList] = useState(tasks);
 
   useEffect(() => {
     setTaskList(tasks);
   }, [tasks]);
 
-  const showToasts = (text: string) => {
-    Toast.success(text);
-  };
-  const handleDeleteTask = (taskName: string) => {
-    const newList = taskList.filter((task) => task.taskName !== taskName);
-    showToasts(`Task has been deleted`);
-    setTaskList(newList);
-  };
-  const clearAll = () => {
-    const newList = [];
-    showToasts("All tasks cleared");
-    setTaskList(newList);
-  };
   return (
     <View style={styles.container}>
       <View style={styles.container}>

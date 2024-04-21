@@ -14,16 +14,41 @@ import useFont from "./hooks/useFont";
 import MoonIcon from "./components/MoonIcon";
 import NewTask from "./components/NewTask";
 import TaskList from "./components/TaskList";
-import ToastManager from "toastify-react-native";
+import ToastManager, { Toast } from "toastify-react-native";
 
 const App: React.FC = () => {
   const font = useFont();
   const dimension = Dimensions.get("screen");
   const [tasks, setTasks] = useState([]);
 
-  const handleAddTask = (task: { isComplete: boolean; taskName: string }) => {
-    const newTaskList = [...tasks, task];
+  const showToasts = (text: string) => {
+    Toast.success(text);
+  };
+
+  const handleAddTask = (newTask: {
+    isComplete: boolean;
+    taskName: string;
+  }) => {
+    console.log(newTask);
+    const taskExists = tasks.some((task) => task.taskName === newTask.taskName);
+    if (taskExists) {
+      showToasts("Task already exist");
+      return;
+    }
+    const newTaskList = [...tasks, newTask];
     setTasks(newTaskList);
+  };
+
+  const handleDeleteTask = (taskName: string) => {
+    const newList = tasks.filter((task) => task.taskName !== taskName);
+    showToasts(`Task has been deleted`);
+    setTasks(newList);
+  };
+
+  const clearAll = () => {
+    const newList = [];
+    showToasts("All tasks cleared");
+    setTasks(newList);
   };
 
   return (
@@ -44,7 +69,11 @@ const App: React.FC = () => {
         <NewTask handleAdd={handleAddTask} />
       </View>
       <ScrollView style={styles.todoContainerList}>
-        <TaskList tasks={tasks} />
+        <TaskList
+          tasks={tasks}
+          clearAll={clearAll}
+          handleDeleteTask={handleDeleteTask}
+        />
       </ScrollView>
     </View>
   );

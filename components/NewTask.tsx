@@ -19,17 +19,6 @@ const NewTask: React.FC<Props> = ({ handleAdd }) => {
     setTask(text);
   };
 
-  const handleTaskSubmit = () => {
-    if (task.trim() === "") {
-      // Prevent adding empty tasks
-      return;
-    }
-    // Pass the task to the parent component or perform other actions
-    console.log("New task:", task);
-    // Clear the input field after submitting the task
-    setTask("");
-  };
-
   return (
     <View style={styles.container}>
       <TextInput
@@ -40,8 +29,12 @@ const NewTask: React.FC<Props> = ({ handleAdd }) => {
         onSubmitEditing={() => handleAdd({ isComplete: false, taskName: task })}
       />
       <TouchableOpacity
-        style={styles.button}
-        onPress={() => handleAdd({ isComplete: false, taskName: task })}
+        disabled={task === ""}
+        style={[styles.button, task === "" && styles.buttonDisabled]}
+        onPress={() => {
+          handleAdd({ isComplete: false, taskName: task.trim() });
+          setTask("");
+        }}
       >
         <Text style={styles.buttonText}>Add</Text>
       </TouchableOpacity>
@@ -69,6 +62,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingVertical: 15,
     paddingHorizontal: 15,
+  },
+  buttonDisabled: {
+    backgroundColor: colors.veryDarkGrayrishBlue,
   },
   buttonText: {
     color: colors.lightGray,
